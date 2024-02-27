@@ -6,7 +6,7 @@ import netifaces as ni
 
 
 with open("webhook_url.txt") as f:
-    webhook_url = f.read()
+    webhook_url = f.read().strip()
 header = "Content-Type: application/json"
 
 
