@@ -2,26 +2,11 @@ import requests
 import socket
 import os
 import datetime
-import netifaces as ni
 
 
 with open("webhook_url.txt") as f:
     webhook_url = f.read().strip()
 header = "Content-Type: application/json"
-
-
-def getIPaddress(nface: str) -> str:
-    """
-    Get IPv4 Address of NIC.
-
-    Args:
-        nface str: NIC Name
-
-    Returns:
-        IP Address v4
-    """
-
-    return ni.ifaddresses(nface)[ni.AF_INET][0]["addr"]
 
 
 def main():
@@ -35,8 +20,7 @@ def main():
         "embeds": [
             {
                 "title": "Login notification",
-                "description": f'{os.getenv("PAM_USER")} logged in to {hostname} from {os.getenv("PAM_RHOST")}'
-                f'({getIPaddress("en01")}, {getIPaddress("ts01")})',
+                "description": f'{os.getenv("PAM_USER")} logged in to {hostname} from {os.getenv("PAM_RHOST")}',
                 "color": 0x248046,
                 "timestamp": timestamp
             },
