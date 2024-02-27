@@ -26,36 +26,22 @@ def getIPaddress(nface: str) -> str:
 
 def main():
 
-    pam_type = os.getenv("PAM_TYPE")
     hostname = socket.gethostname()
     bot_usernm = f"{hostname} notification"
     timestamp = datetime.datetime.now().strftime("%Y-%m-%dT%H:%M%S%z")
 
-    if (pam_type == "open_session"):
-        data = {
-            "username": bot_usernm,
-            "embeds": [
-                {
-                    "title": "Login notification",
-                    "description": f'{os.getenv("PAM_USER")} logged in to {hostname} from {os.getenv("PAM_RHOST")}'
-                    f'({getIPaddress("en01")}, {getIPaddress("ts01")})',
-                    "color": 0x248046,
-                    "timestamp": timestamp
-                },
-            ],
-        }
-    elif (pam_type == "close_session"):
-        data = {
-            "username": bot_usernm,
-            "embeds": [
-                {
-                    "title": "Logout notification",
-                    "description": f'{os.getenv("PAM_USER")} logged out to {hostname} from {os.getenv("PAM_RHOST")}'
-                    f'({getIPaddress("en01")}, {getIPaddress("ts01")})',
-                    "timestamp": timestamp
-                },
-            ],
-        }
+    data = {
+        "username": bot_usernm,
+        "embeds": [
+            {
+                "title": "Login notification",
+                "description": f'{os.getenv("PAM_USER")} logged in to {hostname} from {os.getenv("PAM_RHOST")}'
+                f'({getIPaddress("en01")}, {getIPaddress("ts01")})',
+                "color": 0x248046,
+                "timestamp": timestamp
+            },
+        ],
+    }
 
     requests.post(webhook_url, json=data)
 
