@@ -18,7 +18,7 @@ urllib3==2.2.1
 
 1. `$ python -m venv .env`
 2. `$ pip install -r requirements.txt`
-3. discord-notify.pyを実行するシェルスクリプトを作成(以下は例)
+3. notify_discord.pyを実行するシェルスクリプトを作成(以下は例)
 
 ```bash
 #!/bin/bash
